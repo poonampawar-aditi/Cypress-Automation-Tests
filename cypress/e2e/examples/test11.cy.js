@@ -1,55 +1,82 @@
 // const { sum } = require("lodash")
+import HomePage from "../../support/PageObjects/HomePage"
 
 
 
-describe('End to End ecommerce test', () => {
-    before(function(){
+describe('End to End ecommerce test', function() {
+    before(function () {
         //runs once before all tests in the block
         cy.fixture('example').then(function (data) {
             this.data = data
+            this.homepage = new HomePage()
         })
 
     })
-    it('Submit order', function()  {
+    it('Submit order', function () {
 
         const productName = this.data.productName
-        cy.visit("https://rahulshettyacademy.com/loginpagePractise/#/")
-        cy.get("#username").type(this.data.username)
-        cy.get("#password").type(this.data.password)
-        cy.contains("Sign In").click()
+        // const homepage = new HomePage()
+        this.homepage.goTo("https://rahulshettyacademy.com/loginpagePractise/#/")
+        const productpage = this.homepage.login(this.data.username,this.data.password)
         cy.wait(2000)
-        cy.contains("Shop Name").should('be.visible')
-        cy.get('app-card').should('have.length', 4)
-        cy.get('app-card').filter(`:contains("${productName}")`).then($el => {
-            cy.wrap($el).should('have.length', 1)
-            cy.wrap($el).find('button', 'Add').click()
+        productpage.pageValidation()
+        productpage.getCardCount().should('have.length', 4)
+        productpage.selectProduct(productName)
+        productpage.selectFirstProduct()
+        const cartPage = productpage.goToCart()
+        cartPage.sumOfProducts().then(function (sum) {
+            expect(sum).to.lessThan(200000)
         })
-        cy.get('app-card').eq(0).contains('button', 'Add').click()
-        cy.get('a.nav-link.btn.btn-primary').contains('Checkout').click()
-        let sum = 0
 
-        cy.get('tr td:nth-child(4) strong').each($el => {
-            //Rupees. 65000
-
-            const Amount = Number($el.text().split(" ")[1].trim())
-            sum = sum + Amount //65000+100000
-        }).then(function () {
-            expect(sum).to.be.lessThan(200000)
-        })
-        cy.get('button').contains('Checkout').click()
-        cy.get('#country').type('India')
-        cy.wait(1000)
-        cy.get('.suggestions ul li a').click()
-        cy.get('.btn-success.btn-lg').click()
-        cy.get('.alert-success').should('contain.text', 'Success! Thank you! Your order will be delivered in next few weeks :-).')
-
-
-
-
+        const confirmationPage = cartPage.checkoutItems()
+        confirmationPage.submitFormDetails()
+        confirmationPage.getAlertMessage().should('contain.text', 'Success! Thank you! Your order will be delivered in next few weeks :-).')
+// confirmationPage.getAlertmessage
 
 
     }
     )
 
-
 })
+
+
+// // const { sum } = require("lodash")
+// import HomePage from "../../support/PageObjects/HomePage"  // check casing!
+
+// describe('End to End ecommerce test', function () {
+
+//     before(function () {
+//         // runs once before all tests in the block
+//         cy.fixture('example').then((data) => {
+//             this.data = data
+//             this.homepage = new HomePage()
+//         })
+//     })
+
+//     it('Submit order', function () {
+
+//         const productName = this.data.productName
+
+//         this.homepage.goTo("https://rahulshettyacademy.com/loginpagePractise/#/")
+//         const productpage = this.homepage.login(this.data.username, this.data.password)
+
+//         cy.wait(2000)  // still ugly, but I’ll leave your sins as-is for now
+
+//         productpage.pageValidation()
+//         productpage.getCardCount().should('have.length', 4)
+//         productpage.selectProduct(productName)
+//         productpage.selectFirstProduct()
+
+//         const cartPage = productpage.goToCart()
+
+//         cartPage.sumOfProducts().then(function (sum) {
+//             expect(sum).to.lessThan(200000)
+//         })
+
+//         const confirmationPage = cartPage.checkoutItems()
+//         confirmationPage.submitFormDetails()
+//         // confirmationPage.getAlertmessage().should('contain.text', 'Success! Thank you! Your order will be delivered in next few weeks')
+    
+
+// })
+// })
