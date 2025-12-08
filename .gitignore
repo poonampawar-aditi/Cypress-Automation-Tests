@@ -1,0 +1,4 @@
+//Ignore Node Modules, Videos and screenshots
+node_modules/
+screenshots/
+videos/
