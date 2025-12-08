@@ -1,1 +1,8 @@
+<<<<<<< HEAD
 node_modules
+=======
+//Ignore Node Modules, Videos and screenshots
+node_modules/
+screenshots/
+videos/
+>>>>>>> 10a1503d8e9f80d71dfcc86486e2585a9bd65e52
