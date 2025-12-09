@@ -3,7 +3,7 @@
 describe('My Fourth Test Suite', function() {
 
   it('My Fourth Test case', function() {
-    cy.visit("https://rahulshettyacademy.com/AutomationPractice/")
+    cy.visit(Cypress.env('url')+"/AutomationPractice/")
     // cy.get('#name').type("Aditi")
     cy.get('#alertbtn').click()
     cy.get('[value="Confirm"]').click()

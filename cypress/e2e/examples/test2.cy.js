@@ -6,7 +6,7 @@ describe('My Second Test Suite', function()
 it('My Second Test case',function() {
  
  
-cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
+cy.visit(Cypress.env('url')+"/seleniumPractise/#/")
 cy.get('.search-keyword').type('ca')
 cy.wait(2000)
 //selenium get hit url in browser, cypress get acts like findElement of selenium

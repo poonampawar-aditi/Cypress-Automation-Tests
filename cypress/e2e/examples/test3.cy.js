@@ -5,7 +5,7 @@ describe('My Third Test Suite', function() {
   it('My Third Test case', function() {
 
     // Check boxes
-    cy.visit("https://rahulshettyacademy.com/AutomationPractice/")
+    cy.visit(Cypress.env('url')+"/AutomationPractice/")
     cy.get('#checkBoxOption1').check().should('be.checked').and('have.value', 'option1') // and treats should as new assertion and concatenates it
 
     // cy.get('#checkBoxOption1').uncheck().should('not.be.checked')

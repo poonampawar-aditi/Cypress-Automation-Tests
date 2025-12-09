@@ -7,7 +7,7 @@ describe('Calendar test', () => {
         const year = "2027";
         const expectedList = [monthNumber, date, year];
 
-        cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+        cy.visit(Cypress.env('url')+"/seleniumPractise/#/offers");
         cy.wait(5000)
         cy.get(".react-date-picker__inputGroup").click();
 
