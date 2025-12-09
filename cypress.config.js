@@ -1,18 +1,3 @@
-const { defineConfig } = require("cypress");
-
-module.exports = defineConfig({
-  // projectId: 'upboiu',
-  projectId: '32bd89',
-  e2e: {
-    url: 'https://rahulshettyacademy.com',
-       watchForFileChanges: false, //to disable auto re-run of tests on saving the file
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
-    specPattern: 'cypress/e2e/examples/*.cy.js'
-  },
-});
-
 
 const { defineConfig } = require("cypress");
 const browserify = require("@cypress/browserify-preprocessor");
