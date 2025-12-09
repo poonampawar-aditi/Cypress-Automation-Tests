@@ -1,0 +1,108 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-09T19:55:25.343Z",
+    "end": "2025-12-09T19:55:37.842Z",
+    "duration": 12499,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a032f57c-7068-429b-9ca5-ec4fe4019222",
+      "title": "",
+      "fullFile": "cypress\\e2e\\examples\\test1.cy.js",
+      "file": "cypress\\e2e\\examples\\test1.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a7170033-d048-4991-a906-42727660393e",
+          "title": "My First Test Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "My FirstTest case",
+              "fullTitle": "My First Test Suite My FirstTest case",
+              "timedOut": null,
+              "duration": 9578,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(Cypress.env('url') + \"/seleniumPractise/#/\");\ncy.get('.search-keyword').type('ca');\ncy.wait(2000);\n//selenium get hit url in browser, cypress get acts like findElement of selenium\ncy.get('.product').should('have.length', 5);\ncy.get('.product:visible').should('have.length', 4);\n//Parent child chaining\ncy.get('.products').as('productLocator'); //aliasing\ncy.get('@productLocator').find('.product').should('have.length', 4);\ncy.get(':nth-child(3) > .product-action > button').click();\ncy.get('@productLocator').find('.product').eq(2).contains('ADD TO CART').click().then(function () {\n  console.log('sf');\n});\ncy.get('@productLocator').find('.product').each(($el, index, $list) => {\n  const textVeg = $el.find('h4.product-name').text();\n  if (textVeg.includes('Cashews')) {\n    $el.find('button').click();\n  }\n});\n//assert if logo text is correctly displayed\ncy.get('.brand').should('have.text', 'GREENKART');\n//this is to print in logs\ncy.get('.brand').then(function (logoelement) {\n  cy.log(logoelement.text());\n});\n//const logo=cy.get('.brand')\n//cy.log(cy.get('.brand').text())\n// cy.log(logo.text())\n//fixture",
+              "err": {},
+              "uuid": "b9ce23ea-936c-44ba-a0ee-66135df7c415",
+              "parentUUID": "a7170033-d048-4991-a906-42727660393e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b9ce23ea-936c-44ba-a0ee-66135df7c415"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9578,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress\\reports\\html\\.jsons",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "charts": true,
+        "embeddedScreenshots": true,
+        "inlineAssets": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}
