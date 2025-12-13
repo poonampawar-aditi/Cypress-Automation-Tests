@@ -1,8 +1,28 @@
-<<<<<<< HEAD
-node_modules
-=======
-//Ignore Node Modules, Videos and screenshots
+# Node
 node_modules/
-screenshots/
-videos/
->>>>>>> 10a1503d8e9f80d71dfcc86486e2585a9bd65e52
+
+# Cypress artifacts
+cypress/screenshots/
+cypress/videos/
+
+# Cucumber reports (generated)
+cypress/cucumberreports/
+!cypress/cucumberreports/.gitkeep
+
+# Allure
+allure-results/
+allure-report/
+
+# OS / Editor noise
+.DS_Store
+.vscode/settings.json
+bash: node_modules/: Is a directory
+bash: cypress/screenshots/: Is a directory
+bash: cypress/videos/: No such file or directory
+bash: cypress/cucumberreports/: Is a directory
+bash: !cypress/cucumberreports/.gitkeep: event not found
+bash: allure-results/: Is a directory
+bash: allure-report/: Is a directory
+bash: .DS_Store: command not found
+bash: Thumbs.db: command not found
+.vscode/settings.json: line 2: git.allowForcePush:: command not found
