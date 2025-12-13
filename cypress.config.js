@@ -1,6 +1,28 @@
 const { defineConfig } = require("cypress");
 const allureWriter = require("@shelex/cypress-allure-plugin/writer");
+const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
+const addCucumberPreprocessorPlugin = require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
+const createEsbuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
 
+async function setupNodeEvents(on, config) {
+  // This is required for the preprocessor to be able to generate JSON reports after each run, and more,
+  await addCucumberPreprocessorPlugin(on, config);
+
+  on(
+    "file:preprocessor",
+    createBundler({
+      plugins: [createEsbuildPlugin(config)],
+    })
+  );
+  // register Allure writer
+  allureWriter(on, config);
+  return config;
+  // Cucumber Preprocessor setup
+
+
+
+
+}
 module.exports = defineConfig({
   defaultCommandTimeout: 6000,
 
@@ -20,12 +42,21 @@ module.exports = defineConfig({
   projectId: "32bd89",
 
   e2e: {
-    setupNodeEvents(on, config) {
-      // register Allure writer
-      allureWriter(on, config);
-      return config;
-    },
+    setupNodeEvents,
 
-    specPattern: "cypress/e2e/**/*.cy.js",
+    // specPattern: "cypress/e2e/**/*.cy.js",
+    specPattern: "cypress/e2e/**/*.feature",
+    "cucumber": {
+      "format": [
+        "json:cypress/cucumberreports/results.json"
+      ]
+    }
+
+    // cucumberJson: {
+    //   generate: true,
+    //   outputFolder: "./cypress/cucumberreports/results.json",
+    //   // filePrefix: "",
+    //   // fileSuffix: ".json"
+    // }
   },
 });
