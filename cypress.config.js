@@ -44,8 +44,8 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents,
 
-    // specPattern: "cypress/e2e/**/*.cy.js",
-    specPattern: "cypress/e2e/**/*.feature",
+    specPattern: "cypress/e2e/**/*.cy.js",
+    // specPattern: "cypress/e2e/**/*.feature",
     "cucumber": {
       "format": [
         "json:cypress/cucumberreports/results.json"
